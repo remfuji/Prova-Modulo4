@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-const albumId = "037ef574-e0a6-460f-b24d-f23ba292ac72"; 
+const albumId = "d198641b-f442-4a63-a095-db0fa5fd34af"; 
 const newPhotoData = {
-  name: 'Nuova Foto',
+  name: 'New Photo',
   hashtags: ['#decorazioni', '#natale2023']
 };
 

@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const albumId = "037ef574-e0a6-460f-b24d-f23ba292ac72"; 
-const photoId = "01edccf5-5357-46b3-b7fe-776a6be4bfff"; 
+const albumId = "d03f1759-104e-4f58-b2a0-65f7a5a3621f"; 
+const photoId = "fb13ed1f-5ca4-428a-86ce-ec906b9e23f5"; 
 
 axios.delete(`http://localhost:3000/albums/${albumId}/photos/${photoId}`)
   .then(() => {

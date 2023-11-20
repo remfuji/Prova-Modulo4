@@ -95,55 +95,43 @@ app.delete('/albums/:albumId/photos/:photoId', (req, res) => {
   res.sendStatus(204);
 });
 
-app.put('/albums/:id',  (req, res) => {
+app.put('/albums/:id', (req, res) => {
   const { id } = req.params;
-  const { name, hashtags } = req.body; 
-  const albumToUpdateIndex = albums.findIndex(album => album.id === id);
+  const { name, hashtags } = req.body;
 
-  if (albumToUpdateIndex === -1) {
+  const foundAlbum = albums.find(album => album.id === id);
+
+  if (!foundAlbum) {
     return res.status(404).json({ message: 'Album not found' });
   }
 
-  const updatedAlbum = {
-    ...albums[albumToUpdateIndex], 
-    name: name || albums[albumToUpdateIndex].name, 
-    hashtags: hashtags || albums[albumToUpdateIndex].hashtags,
-    modifiedAt: getCurrentDateTime(), 
-  };
+  foundAlbum.name = name || foundAlbum.name;
+  foundAlbum.hashtags = hashtags || foundAlbum.hashtags;
+  foundAlbum.modifiedAt = getCurrentDateTime();
 
-  albums[albumToUpdateIndex] = updatedAlbum;
-
-  res.json(updatedAlbum);
+  res.json(foundAlbum);
 });
 
 
 app.put('/albums/:albumId/photos/:photoId', (req, res) => {
   const { albumId, photoId } = req.params;
-  const { name, hashtags} = req.body;
+  const { name, hashtags } = req.body;
 
-  const album = albums.find(album => album.id === albumId);
+  const foundAlbum = albums.find(album => album.id === albumId);
+  const foundPhoto = foundAlbum.photos.find(photo => photo.id === photoId);
 
-  if (!album) {
-    return res.status(404).json({ message: 'Album not found' });
+  if (!foundAlbum || !foundPhoto) {
+    return res.status(404).json({ message: 'Album or Photo not found' });
   }
 
-  const photoToUpdateIndex = album.photos.findIndex(photo => photo.id === photoId);
+  foundPhoto.name = name || foundPhoto.name;
+  foundPhoto.hashtags = hashtags || foundPhoto.hashtags;
+  foundPhoto.modifiedAt = getCurrentDateTime();
 
-  if (photoToUpdateIndex === -1) {
-    return res.status(404).json({ message: 'Photo not found' });
-  }
-
-  const updatedPhoto = {
-    ...album.photos[photoToUpdateIndex],
-    name: name || album.photos[photoToUpdateIndex].name, 
-    hashtags: hashtags || photos[photoToUpdateIndex].hashtags, 
-    modifiedAt: getCurrentDateTime(), 
-  };
-
-  album.photos[photoToUpdateIndex] = updatedPhoto; 
-  updateModifiedDateTime(album); 
-  res.json(updatedPhoto);
+  updateModifiedDateTime(foundAlbum);
+  res.json(foundPhoto);
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

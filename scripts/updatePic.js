@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const albumId = "037ef574-e0a6-460f-b24d-f23ba292ac72"; 
-const photoId = "01edccf5-5357-46b3-b7fe-776a6be4bfff"; 
+const albumId = "d198641b-f442-4a63-a095-db0fa5fd34af"; 
+const photoId = "ecc52ff1-30d1-404b-adef-a354196861e7"; 
 
 const updatedPhotoData = {
-  name: 'Nuovo Nome Foto',
+  name: 'New Photo Name',
   hashtags: ['#albero', '#vigilia'],
 };
 
