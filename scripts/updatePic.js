@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const albumId = "88ea33aa-3fc8-4e28-83ae-71114c5f84cf"; 
-const photoId = "1e8cc76a-cb5d-42c2-919f-bb38a4b15428"; 
+const albumId = "037ef574-e0a6-460f-b24d-f23ba292ac72"; 
+const photoId = "01edccf5-5357-46b3-b7fe-776a6be4bfff"; 
 
 const updatedPhotoData = {
   name: 'Nuovo Nome Foto',
